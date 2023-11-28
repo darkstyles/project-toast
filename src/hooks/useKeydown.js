@@ -12,7 +12,7 @@ const useKeydown = ({ key, handler }) => {
     return () => {
       window.removeEventListener("keydown", handleKeydown);
     };
-  }, []);
+  }, [key, handler]);
 };
 
 export default useKeydown;
