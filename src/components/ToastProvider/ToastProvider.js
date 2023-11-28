@@ -26,6 +26,9 @@ function ToastProvider({ children }) {
   const removeToast = (removeMessage) => {
     setToasts([...toasts.filter(({ message }) => message !== removeMessage)]);
   };
+  const resetToast = () => {
+    setToasts([]);
+  };
 
   const value = {
     message,
@@ -35,6 +38,7 @@ function ToastProvider({ children }) {
     toasts,
     addToast,
     removeToast,
+    resetToast,
   };
 
   return (

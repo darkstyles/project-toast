@@ -9,8 +9,27 @@ import styles from "./ToastPlayground.module.css";
 export const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
 function ToastPlayground() {
-  const { message, setMessage, selectedVariant, setSelectedVariant, addToast } =
-    React.useContext(ToastContext);
+  const {
+    message,
+    setMessage,
+    selectedVariant,
+    setSelectedVariant,
+    addToast,
+    resetToast,
+  } = React.useContext(ToastContext);
+
+  React.useEffect(() => {
+    const handleKeydown = (e) => {
+      if (e.key === "Escape") {
+        resetToast();
+      }
+    };
+    window.addEventListener("keydown", handleKeydown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeydown);
+    };
+  }, []);
 
   return (
     <div className={styles.wrapper}>
@@ -42,7 +61,7 @@ function ToastPlayground() {
           <div className={styles.row}>
             <div className={styles.label}>Variant</div>
             <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-              {VARIANT_OPTIONS.map((option) => {
+              {VARIANT_OPTIONS.map((option, index) => {
                 const id = `variant-${option}`;
                 return (
                   <label key={id} htmlFor={id}>
