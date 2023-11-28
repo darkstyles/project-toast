@@ -6,6 +6,7 @@ import { ToastContext } from "../ToastProvider";
 
 import styles from "./ToastPlayground.module.css";
 
+// 상수로 따로 빼서 공통으로 관리하는게 낫지 않을까?
 export const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
 function ToastPlayground() {
@@ -42,8 +43,9 @@ function ToastPlayground() {
           <div className={styles.row}>
             <div className={styles.label}>Variant</div>
             <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-              {VARIANT_OPTIONS.map((option, index) => {
+              {VARIANT_OPTIONS.map((option) => {
                 const id = `variant-${option}`;
+                // 이 부분을 컴포넌트화 하는게 의미가 있을까?
                 return (
                   <label key={id} htmlFor={id}>
                     <input
