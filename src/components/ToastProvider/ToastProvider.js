@@ -1,4 +1,5 @@
 import React from "react";
+import useEscapeKey from "../../hooks/useEscapeKey";
 import { VARIANT_OPTIONS } from "../ToastPlayground";
 
 export const ToastContext = React.createContext();
@@ -29,6 +30,12 @@ function ToastProvider({ children }) {
   const resetToast = () => {
     setToasts([]);
   };
+
+  useEscapeKey((e) => {
+    if (e.key === "Escape") {
+      resetToast();
+    }
+  });
 
   const value = {
     message,
